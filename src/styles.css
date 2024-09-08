@@ -61,3 +61,12 @@ h3 {
 .card img {
   width: 100%;
 }
+
+.reset-btn {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}

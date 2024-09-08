@@ -1,36 +1,31 @@
-import { useEffect, useState } from "react"
+
 import { GifItem } from "./GifItem";
-import { getGifs } from "../helpers/getGifs"
+import { useFetchGrid } from "../hooks/useFetchGrid";
+import { ErrorGrid } from "./ErrorGrid";
 
 export const GifGrid = ({ category }) => {
-
-    const [images, setImages] = useState([]);
-
-    const getImages = async () => {
-        const newImages = await getGifs(category);
-        setImages(newImages)
-    }
-
-    useEffect(() => {
-        getImages();
-
-    }, [])
-
+    const { images, isLoading } = useFetchGrid(category);
+    const emptinessFlag = images.length === 0;
 
     return (
         <div key={category}>
             <h3>{category}</h3>
+            {isLoading && (<h2>🔄️ Cargando...</h2>)}
             <div className="card-grid">
                 {
-                    images.map((image) => (
-                        <GifItem
-                            key={image.id}
-                            //omg!! wea wena!
-                            {...image}
-                        />
-                    ))
+                    emptinessFlag ? (
+                        <ErrorGrid />
+                    ) : (
+                        images.map((image) => (
+                            <GifItem
+                                key={image.id}
+                                {...image}
+                                emptinessFlag={emptinessFlag}
+                            />
+                        ))
+                    )
                 }
             </div>
-        </div >
-    )
-}
+        </div>
+    );
+};
