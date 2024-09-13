@@ -1,6 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { GifItem } from "../../src/components/GifItem";
 
+/**
+ * *Tuve que recurrir a reparar el algunos archivos Jest.config, nada del otro mundo.
+ */
+
 describe('Pruebas en <GifItem/>', () => { 
     
     const title = 'makima';
