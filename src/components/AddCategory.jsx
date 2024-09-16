@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const AddCategory = ({ onNewCategory }) => {
   const [inputValue, setInputValue] = useState('');
@@ -14,12 +15,12 @@ export const AddCategory = ({ onNewCategory }) => {
     //Yo lo hice de otra manera mas corta, fernando opto por el camino largo. Se anota igual.
     //setCategories(categories => [inputValue, ...categories]);
 
-    onNewCategory(inputValue.trim());
     setInputValue('');
+    onNewCategory(inputValue.trim());
   };
 
   return (
-    <form action="" onSubmit={onSubmitForm}>
+    <form action="" onSubmit={onSubmitForm} aria-label='form'>
       {' '}
       {/*Recordar que esto es lo mismo que onSubmit = {(event)=> onSubmit(event)} */}
       <input
@@ -31,3 +32,8 @@ export const AddCategory = ({ onNewCategory }) => {
     </form>
   );
 };
+
+
+AddCategory.propTypes = {
+  onNewCategory: PropTypes.func.isRequired,
+}
